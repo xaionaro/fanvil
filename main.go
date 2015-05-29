@@ -12,7 +12,7 @@ func (p *Fanvil) SetCfgUrl(cfgurl string) (error) {
 	return nil;
 }
 
-func (p *Fanvil) Reboot( string) (error) {
+func (p *Fanvil) Reboot() (error) {
 	return nil;
 }
 
