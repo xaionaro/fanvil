@@ -1,11 +1,11 @@
 package fanvil;
 
-type Fanvil {
+type Fanvil struct {
 	addr string;
 }
 
 func New(addr string) (p *Fanvil) {
-	return Fanvil{addr: addr};
+	return &Fanvil{addr: addr};
 }
 
 func (p *Fanvil) SetCfgUrl(cfgurl string) (error) {
