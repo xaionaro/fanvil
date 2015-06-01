@@ -425,6 +425,6 @@ func (p *Fanvil) Reboot() (error) {
 			return p.rebootThroughExtTelnet();
 	}
 
-	return fmt.Errorf("DownloadCfg(): Unknown connection type: %i", p.connectionType);
+	return fmt.Errorf("Reboot(): Unknown connection type: %i", p.connectionType);
 }
 
