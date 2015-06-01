@@ -318,7 +318,7 @@ func (p *Fanvil) rebootThroughExtTelnet() (error) {
 
 	scriptFile,err := ioutil.TempFile("/tmp", "go-fanvil");
 	if (err != nil) {
-		return fmt.Errorf("downloadCfgThroughExtTelnet(): %s", err.Error());
+		return fmt.Errorf("rebootThroughExtTelnet(): %s", err.Error());
 	}
 	defer os.Remove(scriptFile.Name());
 	scriptFile.Write([]byte(script));
@@ -329,7 +329,7 @@ func (p *Fanvil) rebootThroughExtTelnet() (error) {
 	out,err := cmd.Output();
 
 	if (err != nil) {
-		return fmt.Errorf("downloadCfgThroughExtTelnet(): %s: %s", err.Error(), out);
+		return fmt.Errorf("rebootThroughExtTelnet(): %s: %s", err.Error(), out);
 	}
 
 	return nil;
