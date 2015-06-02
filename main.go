@@ -52,9 +52,10 @@ const (
 	CFGTRANSPORTPROTO_FTP	int    = 2;	// TODO: Check this value
 	CFGTRANSPORTPROTO_HTTP	int    = 4;
 
-	SCRIPT_HEADER		string = "printf '#!/usr/bin/expect\n\nset rc 0\nset timeout 5\n\nset phoneaddr [lindex $argv 0]\nset login     [lindex $argv 1]\nset passwd    [lindex $argv 2]\n\nspawn telnet $phoneaddr\n\nexpect \"Login:\"\nsend \"$login\"\nexpect \"Password:\"\nsend \"$passwd\"\nexpect {\n	\"# \"	{}\n	default	{set rc 1}\n}\n\nswitch ($rc) {\n	0 {\n";
+	SCRIPT_HEADER		string = "printf '#!/usr/bin/expect\n\nset rc 0\nset timeout 1\n\nset phoneaddr [lindex $argv 0]\nset login     [lindex $argv 1]\nset passwd    [lindex $argv 2]\n\nspawn telnet $phoneaddr\n\nexpect \"Login:\"\nsend \"$login\"\nexpect \"Password:\"\nsend \"$passwd\"\nexpect {\n	\"# \"	{}\n	default	{set rc 1}\n}\n\nif { $rc != 0 } {\n	exit $rc\n}\nset timeout 30\n";
 
-	SCRIPT_FOOTER		string = "\n		expect {\n			\"# \"\n			default {set rc 2}\n		}\n	}\n}\n\nexit $rc\n' | expect - $@\n";
+	SCRIPT_FOOTER		string = "\nexpect {\n	\"# \" {}\n	default {set rc 2}\n}\n\nexit $rc\n' | expect - $@\n";
+
 );
 
 func New(addr string, login string, password string) (p Fanvil) {
